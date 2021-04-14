@@ -1,0 +1,44 @@
+
+body {
+    text-align: center;
+    font-family: 'Zen Dots', cursive;
+    margin: 0 auto;
+    line-height: 50px;
+}
+div.switch {
+    display: grid;
+    border: 2px solid black;
+    grid-template-columns: 150px 150px;
+    grid-template-rows: 50px;
+    margin-bottom: 50px;
+}
+div.choice {
+    border: 2px solid black;
+}
+div.center {
+    display: flex;
+    justify-content: center;
+}
+div.board {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    border: 2px solid black;
+}
+div.box {
+    border: 2px solid black;
+    line-height: 100px;
+}
+h1 {
+    text-align: center;
+    font-family: 'Zen Dots', cursive;
+    font-size: 2.15em;
+}
+h2 {
+    text-align: center;
+    font-family: 'Zen Dots', cursive;
+}
+.selected {
+    background-color: black;
+    color: white;
+}
