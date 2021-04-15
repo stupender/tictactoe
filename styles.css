@@ -12,8 +12,13 @@ div.switch {
     grid-template-rows: 50px;
     margin-bottom: 50px;
 }
+.selected {
+    background-color: rgb(95, 179, 86);
+    color: white;
+}
 div.choice {
     border: 2px solid black;
+    /* background-color: black; */
 }
 div.center {
     display: flex;
@@ -37,8 +42,4 @@ h1 {
 h2 {
     text-align: center;
     font-family: 'Zen Dots', cursive;
-}
-.selected {
-    background-color: black;
-    color: white;
 }
