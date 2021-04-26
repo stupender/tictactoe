@@ -5,17 +5,7 @@ body {
     margin: 0 auto;
     line-height: 50px;
 }
-div.switch {
-    display: grid;
-    border: 2px solid black;
-    grid-template-columns: 150px 150px;
-    grid-template-rows: 50px;
-    margin-bottom: 50px;
-}
-.selected {
-    background-color: rgb(95, 179, 86);
-    color: white;
-}
+
 div.choice {
     border: 2px solid black;
     /* background-color: black; */
@@ -42,4 +32,31 @@ h1 {
 h2 {
     text-align: center;
     font-family: 'Zen Dots', cursive;
+}
+
+button {
+    border: 4px solid black;
+    width: 300px;
+    height: 50px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Zen Dots', cursive;
+    background-color: rgb(95, 179, 86);
+    color: white;
+}
+
+#reset {
+    background-color: rgb(202, 94, 62);
+    margin-top: 50px;
+}
+
+input {
+    border: none;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    outline: none;
+}
+
+.hidden {
+    display: none;
 }
