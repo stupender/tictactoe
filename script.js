@@ -1,14 +1,14 @@
 // Holds the players -- using factories
-let playerFactory = (name, selection) => {
+let playerFactory = (name, mark) => {
     let playTurn = (board, cell) => {
-        let index = board.box.findIndex(position => position === cell);
+        let index = board.cell.findIndex(position => position === cell);
         if (board.boardArray[index] = "") {
             board.render();
             return index;
         }
         return null
     };
-    
+
     return {
         name,
         mark,
@@ -72,7 +72,7 @@ let gamePlay = (() => {
     let playerOneName = document.querySelector("#player-1");
     let playerTwoName = document.querySelector("#player-2");
     let form = document.querySelector(".player-names");
-    let resetButton = document.querySelector("reset");
+    let resetButton = document.querySelector("#reset");
     let currentPlayer;
     let playerOne;
     let playerTwo;
@@ -86,13 +86,13 @@ let gamePlay = (() => {
         let board = gameBoardModule;
         let gameStatus = document.querySelector(".game-status");
         if (currentPlayer.name !== "") {
-            gameStatus.textContent = `${currentPlayer.name}'s turn`
+            gameStatus.textContent = `${currentPlayer.name}'s Turn`
         }
         else {
-            gameStatus.textContent = "...";
+            return;        
         }
 
-        gameBoardboardModule.gameBoard.addEventListener("click", (event) => {
+        board.gameBoard.addEventListener("click", (event) => {
             event.preventDefault();
             let play = currentPlayer.playTurn(board, event.target);
             if (play !== null) {
@@ -134,10 +134,14 @@ let gamePlay = (() => {
     });
 
     resetButton.addEventListener("click", () => {
-        document.querySelector(".game-status").textContent = "";
-        document.querySelector("#player1").value = "";
-        document.querySelector("#player2").value = "";
-        window.location.reload();
+        if (playerOneName !== "" && playerTwoName !== "") {
+            document.querySelector(".game-status").textContent = "";
+            document.querySelector("#player1").value = "";
+            document.querySelector("#player2").value = "";
+            window.location.reload();
+        } else {
+            return;
+        }
     });
 
     return {
