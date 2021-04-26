@@ -30,7 +30,7 @@ div.board {
     grid-template-rows: 100px 100px 100px;
     border: 2px solid black;
 }
-div.box {
+div.cell {
     border: 2px solid black;
     line-height: 100px;
 }
