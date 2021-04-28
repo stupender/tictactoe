@@ -1,40 +1,41 @@
 // Holds the players -- using factories
-let playerFactory = (name, mark) => {
-    let playTurn = (board, cell) => {
-        let index = board.cell.findIndex(position => position === cell);
-        if (board.boardArray[index] = "") {
+const playerFactory = (name, mark) => {
+    const playTurn = (board, cell) => {
+        const index = board.cells.findIndex(position => position === cell); // Cannot .findIndex of undefined
+        if (board.boardArray[index] === "") {
             board.render();
             return index;
         }
-        return null
+        return null;
     };
-
     return {
         name,
         mark,
         playTurn
-    }
+    };
 };
 
-// Holds the gameboard array -- using modules
-let gameBoardModule = (() => {
-    let boardArray = ["", "", "", "", "", "", "", "", ""];
-    let gameBoard = document.querySelector(".board");
-    let cells = Array.from(document.querySelectorAll(".cell"));
-    let winner = null;
 
-    let render = () => {
+// Holds the gameboard array -- using modules
+const gameBoardModule = (() => {
+    const boardArray = ["", "", "", "", "", "", "", "", ""];
+    const gameBoard = document.querySelector(".board");
+    const cells = Array.from(document.querySelectorAll(".cell"));
+    const winner = null;
+
+    // what is mark for?
+    const render = () => {
         boardArray.forEach((mark, index) => {
             cells[index].textContent = boardArray[index];
         })
     }
 
-    let reset = () => {
+    const reset = () => {
         boardArray = ["", "", "", "", "", "", "", "", ""];
     }
 
-    let checkWin = () => {
-        let winArrays = [
+    const checkWin = () => {
+        const winArrays = [
             [0, 1, 2],
             [3, 4, 5],
             [6, 7, 8],
@@ -63,44 +64,45 @@ let gameBoardModule = (() => {
         boardArray,
         checkWin,
         reset
-    }
+    };
 })();
 
 
 // Controls the flow of the game -- using modules
-let gamePlay = (() => {
-    let playerOneName = document.querySelector("#player-1");
-    let playerTwoName = document.querySelector("#player-2");
-    let form = document.querySelector(".player-names");
-    let resetButton = document.querySelector("#reset");
+const gamePlay = (() => {
+    const playerOneName = document.querySelector("#player-1");
+    const playerTwoName = document.querySelector("#player-2");
+    const form = document.querySelector(".player-names");
+    const resetButton = document.querySelector("#reset");
     let currentPlayer;
     let playerOne;
     let playerTwo;
     
     //Review this
-    let switchTurn = () => {
+    const switchTurn = () => {
         currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
     };
 
-    let gameRound = () => {
-        let board = gameBoardModule;
-        let gameStatus = document.querySelector(".game-status");
+    const gameRound = () => {
+        const board = gameBoardModule;
+        const gameStatus = document.querySelector(".game-status");
         if (currentPlayer.name !== "") {
-            gameStatus.textContent = `${currentPlayer.name}'s Turn`
-        }
-        else {
-            return;        
-        }
+            gameStatus.textContent = `${currentPlayer.name}'s Turn`;
+        } 
+        // else {
+        //     gameStatus.textContent = 'Board: ';
+        // }
 
         board.gameBoard.addEventListener("click", (event) => {
+            //What is preventDefault?
             event.preventDefault();
-            let play = currentPlayer.playTurn(board, event.target);
+            const play = currentPlayer.playTurn(board, event.target); // Cannot .findIndex of undefined
             if (play !== null) {
                 board.boardArray[play] = `${currentPlayer.mark}`;
                 board.render();
-                let winStatus = board.checkWin();
-                if (winStatus == "Tie") {
-                    gameStatus.textContent = "Tie!"
+                const winStatus = board.checkWin();
+                if (winStatus === "Tie") {
+                    gameStatus.textContent = "Tie!";
                 } else if (winStatus === null) {
                     switchTurn();
                     gameStatus.textContent = `${currentPlayer.name}'s Turn`;
@@ -113,7 +115,7 @@ let gamePlay = (() => {
         });
     };
 
-    let gameInit = () => {
+    const gameInit = () => {
         if (playerOneName !== "" && playerTwoName !== "") {
             playerOne = playerFactory(playerOneName.value, "X")
             playerTwo = playerFactory(playerTwoName.value, "O")
@@ -134,14 +136,10 @@ let gamePlay = (() => {
     });
 
     resetButton.addEventListener("click", () => {
-        if (playerOneName !== "" && playerTwoName !== "") {
             document.querySelector(".game-status").textContent = "";
-            document.querySelector("#player1").value = "";
-            document.querySelector("#player2").value = "";
+            document.querySelector("#player-1").value = "";
+            document.querySelector("#player-2").value = "";
             window.location.reload();
-        } else {
-            return;
-        }
     });
 
     return {
@@ -149,3 +147,5 @@ let gamePlay = (() => {
     };
 
 })();
+
+gamePlay.gameInit();
