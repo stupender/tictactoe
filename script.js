@@ -16,19 +16,21 @@ const playerFactory = (name, mark) => {
 };
 
 
+
+
 // Holds the gameboard array -- using modules
 const gameBoardModule = (() => {
-    const boardArray = ["", "", "", "", "", "", "", "", ""];
+    let boardArray = ["", "", "", "", "", "", "", "", ""];
     const gameBoard = document.querySelector(".board");
     const cells = Array.from(document.querySelectorAll(".cell"));
-    const winner = null;
+    let winner = null;
 
-    // what is mark for?
+    // What is mark for?
     const render = () => {
         boardArray.forEach((mark, index) => {
             cells[index].textContent = boardArray[index];
-        })
-    }
+        });
+    };
 
     const reset = () => {
         boardArray = ["", "", "", "", "", "", "", "", ""];
@@ -43,7 +45,7 @@ const gameBoardModule = (() => {
             [1, 4, 7],
             [2, 5, 8],
             [0, 4, 8],
-            [2, 4, 6]
+            [2, 4, 6],
         ];
 
         // Look over this for a stronger understanding
@@ -66,6 +68,8 @@ const gameBoardModule = (() => {
         reset
     };
 })();
+
+
 
 
 // Controls the flow of the game -- using modules
@@ -106,10 +110,10 @@ const gamePlay = (() => {
                 } else if (winStatus === null) {
                     switchTurn();
                     gameStatus.textContent = `${currentPlayer.name}'s Turn`;
-                } else {
+                } else if (winStatus === "current") {
                     gameStatus.textContent = `${currentPlayer.name} Wins!`;
                     board.reset();
-                    board.render();
+                    // board.render();
                 }
             }
         });
